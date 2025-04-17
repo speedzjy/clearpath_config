@@ -27,7 +27,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 import os
-from typing import List
+from typing import (List, Union)
 
 from clearpath_config.common.types.config import BaseConfig
 from clearpath_config.common.types.discovery import Discovery
@@ -69,11 +69,11 @@ class MiddlewareConfig(BaseConfig):
     def __init__(
             self,
             config: dict = {},
-            rmw_implementation: str | RMWImplementation = DEFAULTS[RMW],
-            discovery: str | Discovery = DEFAULTS[DISCOVERY],
+            rmw_implementation: Union[str, RMWImplementation] = DEFAULTS[RMW],
+            discovery: Union[str, Discovery] = DEFAULTS[DISCOVERY],
             profile: str = DEFAULTS[PROFILE],
             override_server_id: bool = DEFAULTS[OVERRIDE_SERVER_ID],
-            servers: List[dict] | ServerListConfig = DEFAULTS[SERVERS],
+            servers: Union[List[dict], ServerListConfig] = DEFAULTS[SERVERS],
             hosts: HostListConfig = None,
             localhost: Hostname = None
             ) -> None:
@@ -107,7 +107,7 @@ class MiddlewareConfig(BaseConfig):
         return str(self._rmw_implementation)
 
     @rmw_implementation.setter
-    def rmw_implementation(self, value: str | RMWImplementation) -> None:
+    def rmw_implementation(self, value: Union[str, RMWImplementation]) -> None:
         if isinstance(value, str):
             self._rmw_implementation = RMWImplementation(value)
         elif isinstance(value, RMWImplementation):
@@ -126,7 +126,7 @@ class MiddlewareConfig(BaseConfig):
         return str(self._discovery)
 
     @discovery.setter
-    def discovery(self, value: str | Discovery) -> None:
+    def discovery(self, value: Union[str, Discovery]) -> None:
         if isinstance(value, str):
             self._discovery = Discovery(value)
         elif isinstance(value, Discovery):
@@ -185,7 +185,7 @@ class MiddlewareConfig(BaseConfig):
         return self._servers
 
     @servers.setter
-    def servers(self, value: List[dict] | ServerListConfig) -> None:
+    def servers(self, value: Union[List[dict], ServerListConfig]) -> None:
         # Generate a list of ServerConfig Objects based on how the input was provided
         server_list = []
         if isinstance(value, list):

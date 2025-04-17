@@ -30,7 +30,8 @@ from typing import (
     Callable,
     Generic,
     List,
-    TypeVar
+    TypeVar,
+    Union
 )
 
 
@@ -61,7 +62,7 @@ class ListConfig(Generic[T, U]):
 
     def find(
             self,
-            _obj: T | U,
+            _obj: Union[T, U],
             ) -> int:
         # Object: T: Template
         if isinstance(_obj, self.__type_T):
@@ -114,7 +115,7 @@ class ListConfig(Generic[T, U]):
 
     def remove(
             self,
-            _obj: T | U,
+            _obj: Union[T, U],
             ) -> None:
         idx = self.find(_obj)
         if idx is not None:
@@ -125,7 +126,7 @@ class ListConfig(Generic[T, U]):
 
     def get(
             self,
-            _obj: T | U,
+            _obj: Union[T, U],
             ) -> T:
         idx = self.find(_obj)
         return None if idx is None else self.__list[idx]
@@ -193,7 +194,7 @@ class OrderedListConfig(Generic[T]):
 
     def find(
             self,
-            obj: T | int
+            obj: Union[T, int]
             ) -> int:
         if isinstance(obj, self.__type_T):
             idx = obj.get_idx()
@@ -238,7 +239,7 @@ class OrderedListConfig(Generic[T]):
 
     def remove(
             self,
-            obj: T | int
+            obj: Union[T, int]
             ) -> None:
         idx = self.find(obj)
         if idx is not None:
@@ -250,7 +251,7 @@ class OrderedListConfig(Generic[T]):
 
     def get(
             self,
-            obj: T | int,
+            obj: Union[T, int],
             ) -> T:
         idx = self.find(obj)
         return None if idx is None else self.__list[idx - self.start_idx]

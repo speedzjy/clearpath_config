@@ -34,6 +34,8 @@ from clearpath_config.common.utils.dictionary import (
     unflatten_dict,
 )
 
+from typing import Union
+
 
 class ROSParameterDefaults:
     A200 = {
@@ -246,7 +248,7 @@ class ExtrasConfig(BaseConfig):
         return urdf
 
     @urdf.setter
-    def urdf(self, value: dict | PackagePath) -> None:
+    def urdf(self, value: Union[dict, PackagePath]) -> None:
         if isinstance(value, dict) and PackagePath.PATH in value and value[PackagePath.PATH]:
             self._urdf = PackagePath()
             self._urdf.from_dict(value)
@@ -271,7 +273,7 @@ class ExtrasConfig(BaseConfig):
         return launch
 
     @launch.setter
-    def launch(self, value: dict | PackagePath) -> None:
+    def launch(self, value: Union[dict, PackagePath]) -> None:
         if isinstance(value, dict) and PackagePath.PATH in value and value[PackagePath.PATH]:
             self._launch = PackagePath()
             self._launch.from_dict(value)

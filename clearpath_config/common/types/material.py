@@ -25,7 +25,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-from typing import List
+from typing import (List, Union)
 
 from clearpath_config.common.types.package_path import PackagePath
 
@@ -39,7 +39,7 @@ class Material():
             self,
             name: str = None,
             color: List = None,
-            texture: PackagePath | dict = None,
+            texture: Union[PackagePath, dict] = None,
             ) -> None:
         self.name = name
         self.color = color
@@ -88,7 +88,7 @@ class Material():
         return self._texture
 
     @texture.setter
-    def texture(self, texture: PackagePath | dict):
+    def texture(self, texture: Union[PackagePath, dict]):
         if texture:
             if isinstance(texture, PackagePath):
                 self._texture = texture

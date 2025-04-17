@@ -35,6 +35,7 @@ from clearpath_config.platform.attachments.config import AttachmentsConfig
 from clearpath_config.platform.attachments.mux import AttachmentsConfigMux
 from clearpath_config.platform.can import CANBridgeConfig
 
+from typing import Union
 
 class DescriptionPackagePath(PackagePath):
     MACRO = "macro"
@@ -252,7 +253,7 @@ class PlatformConfig(BaseConfig):
         return self._extras
 
     @extras.setter
-    def extras(self, value: dict | ExtrasConfig) -> None:
+    def extras(self, value: Union[dict, ExtrasConfig]) -> None:
         if isinstance(value, dict):
             self._extras.config = value
         elif isinstance(value, ExtrasConfig):
@@ -320,7 +321,7 @@ class PlatformConfig(BaseConfig):
         return self._battery
 
     @battery.setter
-    def battery(self, value: dict | BatteryConfig) -> None:
+    def battery(self, value: Union[dict, BatteryConfig]) -> None:
         if isinstance(value, dict):
             self._battery.config = value
         elif isinstance(value, BatteryConfig):

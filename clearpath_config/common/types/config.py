@@ -34,7 +34,7 @@ from clearpath_config.common.utils.dictionary import (
     set_in_dict,
     unflatten_dict
 )
-from typing import Any
+from typing import (Any, Union)
 
 
 class BaseConfig:
@@ -137,7 +137,7 @@ class BaseConfig:
         return str(BaseConfig._NAMESPACE)
 
     @classmethod
-    def set_namespace(cls, namespace: str | Namespace) -> None:
+    def set_namespace(cls, namespace: Union[str, Namespace]) -> None:
         if isinstance(namespace, Namespace):
             BaseConfig._NAMESPACE = namespace
         elif isinstance(namespace, str):

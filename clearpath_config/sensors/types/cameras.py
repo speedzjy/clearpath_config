@@ -30,7 +30,7 @@ from math import pi
 from clearpath_config.common.types.accessory import Accessory
 from clearpath_config.sensors.types.sensor import BaseSensor
 from clearpath_config.common.utils.dictionary import extend_flat_dict
-from typing import List
+from typing import (List, Union)
 
 
 class Republisher():
@@ -372,7 +372,7 @@ class IntelRealsense(BaseCamera):
         self.set_pointcloud_enabled(pointcloud_enabled)
 
     @staticmethod
-    def clean_profile(profile: str | list) -> list:
+    def clean_profile(profile: Union[str, list]) -> list:
         if isinstance(profile, str):
             profile = profile.split(",")
             assert len(profile) == 3, (
@@ -496,13 +496,13 @@ class IntelRealsense(BaseCamera):
         )
 
     @color_profile.setter
-    def color_profile(self, profile: str | list) -> None:
+    def color_profile(self, profile: Union[str, list]) -> None:
         profile = self.clean_profile(profile)
         self.color_width = profile[0]
         self.color_height = profile[1]
         self.fps = profile[2]
 
-    def set_color_profile(self, profile: str | list) -> None:
+    def set_color_profile(self, profile: Union[str, list]) -> None:
         self.color_profile = profile
 
     def get_color_profile(self) -> str:
@@ -585,13 +585,13 @@ class IntelRealsense(BaseCamera):
         )
 
     @depth_profile.setter
-    def depth_profile(self, profile: str | list) -> None:
+    def depth_profile(self, profile: Union[str, list]) -> None:
         profile = self.clean_profile(profile)
         self.depth_width = profile[0]
         self.depth_height = profile[1]
         self.depth_fps = profile[2]
 
-    def set_depth_profile(self, profile: str | list) -> None:
+    def set_depth_profile(self, profile: Union[str, list]) -> None:
         self.depth_profile = profile
 
     def get_depth_profile(self) -> str:

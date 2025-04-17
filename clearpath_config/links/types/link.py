@@ -27,7 +27,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 from clearpath_config.common.types.accessory import Accessory
 from clearpath_config.common.types.material import Material
-from typing import List
+from typing import (List, Union)
 
 
 class BaseLink(Accessory):
@@ -69,7 +69,7 @@ class BaseLink(Accessory):
             rpy: List[float] = Accessory.RPY,
             offset_xyz: List[float] = OFFSET_XYZ,
             offset_rpy: List[float] = OFFSET_RPY,
-            material: Material | dict = MATERIAL
+            material: Union[Material, dict] = MATERIAL
             ) -> None:
         super().__init__(name, parent, xyz, rpy)
         self.offset_xyz: List[float] = BaseLink.OFFSET_XYZ
@@ -125,7 +125,7 @@ class BaseLink(Accessory):
         return self._material
 
     @material.setter
-    def material(self, material: Material | dict) -> None:
+    def material(self, material: Union[Material, dict]) -> None:
         if isinstance(material, Material):
             self._material = material
         if isinstance(material, dict):

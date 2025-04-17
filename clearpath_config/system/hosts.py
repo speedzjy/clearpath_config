@@ -30,7 +30,7 @@ from clearpath_config.common.types.hostname import Hostname
 from clearpath_config.common.types.ip import IP
 from clearpath_config.common.types.list import ListConfig
 from clearpath_config.common.utils.dictionary import flip_dict
-from typing import List
+from typing import (List, Union)
 
 
 # HostConfig
@@ -55,8 +55,8 @@ class HostConfig(BaseConfig):
     def __init__(
             self,
             config: dict = {},
-            hostname: str | Hostname = DEFAULTS[HOSTNAME],
-            ip_address: str | IP = DEFAULTS[IP_ADDRESS],
+            hostname: Union[str, Hostname] = DEFAULTS[HOSTNAME],
+            ip_address: Union[str, IP] = DEFAULTS[IP_ADDRESS],
             ) -> None:
         # Initialization
         self.hostname = hostname
@@ -89,7 +89,7 @@ class HostConfig(BaseConfig):
         return str(self._hostname)
 
     @hostname.setter
-    def hostname(self, value: str | Hostname) -> None:
+    def hostname(self, value: Union[str, Hostname]) -> None:
         if isinstance(value, str):
             self._hostname = Hostname(value)
         elif isinstance(value, Hostname):
@@ -110,7 +110,7 @@ class HostConfig(BaseConfig):
         return self._ip
 
     @ip_address.setter
-    def ip_address(self, value: str | IP) -> None:
+    def ip_address(self, value: Union[str, IP]) -> None:
         if isinstance(value, str):
             self._ip = IP(value)
         elif isinstance(value, IP):

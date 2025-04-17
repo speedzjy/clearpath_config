@@ -27,7 +27,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 import socket
-from typing import List
+from typing import (List, Union)
 
 from clearpath_config.common.types.config import BaseConfig
 from clearpath_config.common.types.domain_id import DomainID
@@ -89,12 +89,12 @@ class SystemConfig(BaseConfig):
     def __init__(
             self,
             config: dict = {},
-            hosts: List[dict] | HostListConfig = DEFAULTS[HOSTS],
-            localhost: str | Hostname = DEFAULTS[LOCALHOST],
-            username: str | Username = DEFAULTS[USERNAME],
-            namespace: str | Namespace = DEFAULTS[NAMESPACE],
-            domain_id: int | DomainID = DEFAULTS[DOMAIN_ID],
-            middleware: dict | MiddlewareConfig = DEFAULTS[MIDDLEWARE],
+            hosts: Union[List[dict], HostListConfig] = DEFAULTS[HOSTS],
+            localhost: Union[str, Hostname] = DEFAULTS[LOCALHOST],
+            username: Union[str, Username] = DEFAULTS[USERNAME],
+            namespace: Union[str, Namespace] = DEFAULTS[NAMESPACE],
+            domain_id: Union[int, DomainID] = DEFAULTS[DOMAIN_ID],
+            middleware: Union[dict, MiddlewareConfig] = DEFAULTS[MIDDLEWARE],
             workspaces: list = DEFAULTS[WORKSPACES]
             ) -> None:
         # Initialization
@@ -143,7 +143,7 @@ class SystemConfig(BaseConfig):
         return self._hosts
 
     @hosts.setter
-    def hosts(self, value: List[dict] | HostListConfig) -> None:
+    def hosts(self, value: Union[List[dict], HostListConfig]) -> None:
         host_list = []
         if isinstance(value, list):
             for d in value:
@@ -180,7 +180,7 @@ class SystemConfig(BaseConfig):
         return str(self._localhost)
 
     @localhost.setter
-    def localhost(self, value: str | Hostname) -> None:
+    def localhost(self, value: Union[str, Hostname]) -> None:
         assert isinstance(value, str) or isinstance(value, Hostname), (
             f"Localhost of {value} is invalid, must be of type 'str' or 'Hostname'"
         )
@@ -198,7 +198,7 @@ class SystemConfig(BaseConfig):
         return str(self._username)
 
     @username.setter
-    def username(self, value: str | Username) -> None:
+    def username(self, value: Union[str, Username]) -> None:
         if isinstance(value, str):
             self._username = Username(value)
         elif isinstance(value, Username):
@@ -217,7 +217,7 @@ class SystemConfig(BaseConfig):
         return BaseConfig.get_namespace()
 
     @namespace.setter
-    def namespace(self, value: str | Namespace) -> None:
+    def namespace(self, value: Union[str, Namespace]) -> None:
         BaseConfig.set_namespace(value)
 
     @property
@@ -229,7 +229,7 @@ class SystemConfig(BaseConfig):
         return int(self._domain_id)
 
     @domain_id.setter
-    def domain_id(self, value: int | DomainID) -> None:
+    def domain_id(self, value: Union[int, DomainID]) -> None:
         if isinstance(value, int):
             self._domain_id = DomainID(value)
         elif isinstance(value, DomainID):
@@ -248,7 +248,7 @@ class SystemConfig(BaseConfig):
         return self._middleware
 
     @middleware.setter
-    def middleware(self, value: dict | MiddlewareConfig) -> None:
+    def middleware(self, value: Union[dict, MiddlewareConfig]) -> None:
         if isinstance(value, dict):
             self._middleware = MiddlewareConfig(config=value,
                                                 hosts=self.hosts,

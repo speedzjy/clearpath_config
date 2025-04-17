@@ -65,7 +65,7 @@ from clearpath_config.sensors.types.lidars_3d import (
     VelodyneLidar,
 )
 
-from typing import List
+from typing import (List, Union)
 
 
 class InertialMeasurementUnit():
@@ -550,7 +550,7 @@ class SensorConfig(BaseConfig):
         self._lidar2d.add(lms1xx)
 
     # Lidar2D: Remove Lidar2D by passing object or index
-    def remove_lidar_2d(self, lidar_2d: BaseLidar2D | int) -> None:
+    def remove_lidar_2d(self, lidar_2d: Union[BaseLidar2D, int]) -> None:
         self._lidar2d.remove(lidar_2d)
 
     # Lidar2D: Get Single Object
@@ -651,7 +651,7 @@ class SensorConfig(BaseConfig):
         self._lidar3d.add(velodyne)
 
     # Lidar3D: Remove Lidar3D by passing object or index
-    def remove_lidar_3d(self, lidar_3d: BaseLidar3D | int) -> None:
+    def remove_lidar_3d(self, lidar_3d: Union[BaseLidar3D, int]) -> None:
         self._lidar3d.remove(lidar_3d)
 
     # Lidar3D: Get Single Object
@@ -797,7 +797,7 @@ class SensorConfig(BaseConfig):
         self._camera.add(realsense)
 
     # Camera: Remove
-    def remove_camera(self, camera: BaseCamera | int) -> None:
+    def remove_camera(self, camera: Union[BaseCamera, int]) -> None:
         self._camera.remove(camera)
 
     # Camera: Get
@@ -896,7 +896,7 @@ class SensorConfig(BaseConfig):
         self._imu.add(imu)
 
     # IMU: Remove IMU by passing object or index
-    def remove_imu(self, imu: BaseIMU | int) -> None:
+    def remove_imu(self, imu: Union[BaseIMU, int]) -> None:
         self._imu.remove(imu)
 
     # IMU: Get Single Object
@@ -988,7 +988,7 @@ class SensorConfig(BaseConfig):
         self._gps.add(duro)
 
     # GPS: Remove GPS by passing object or index
-    def remove_gps(self, gps:  BaseGPS | int) -> None:
+    def remove_gps(self, gps:  Union[BaseGPS, int]) -> None:
         self._gps.remove(gps)
 
     # GPS: Get Single Object

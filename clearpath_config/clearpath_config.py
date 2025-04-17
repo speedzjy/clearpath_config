@@ -34,6 +34,7 @@ from clearpath_config.manipulators.manipulators import ManipulatorConfig
 from clearpath_config.mounts.mounts import MountsConfig
 from clearpath_config.sensors.sensors import SensorConfig
 
+from typing import Union
 
 # ClearpathConfig:
 #  - top level configurator
@@ -73,7 +74,7 @@ class ClearpathConfig(BaseConfig):
         SENSORS: SensorConfig.DEFAULTS,
     }
 
-    def __init__(self, config: dict | str = None) -> None:
+    def __init__(self, config: Union[dict, str] = None) -> None:
         # Read YAML
         if isinstance(config, str):
             config = self.read(config)
@@ -102,7 +103,7 @@ class ClearpathConfig(BaseConfig):
         # Set from Config
         super().__init__(setters, config)
 
-    def read(self, file: str | dict) -> None:
+    def read(self, file: Union[str, dict]) -> None:
         self._file = None
         if isinstance(file, dict):
             return file

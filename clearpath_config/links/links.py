@@ -35,7 +35,7 @@ from clearpath_config.links.types.cylinder import Cylinder
 from clearpath_config.links.types.frame import Frame
 from clearpath_config.links.types.mesh import Mesh
 from clearpath_config.links.types.sphere import Sphere
-from typing import List
+from typing import (List, Union)
 
 
 class Link():
@@ -147,7 +147,7 @@ class LinksConfig(BaseConfig):
         return self._frame
 
     @frame.setter
-    def frame(self, value: List[dict] | LinkListConfig) -> None:
+    def frame(self, value: Union[List[dict], LinkListConfig]) -> None:
         if isinstance(value, list):
             assert all([isinstance(i, dict) for i in value]), (
                 "Links must be list of type 'dict'"
@@ -174,7 +174,7 @@ class LinksConfig(BaseConfig):
         return self._box
 
     @box.setter
-    def box(self, value: List[dict] | LinkListConfig) -> None:
+    def box(self, value: Union[List[dict], LinkListConfig]) -> None:
         if isinstance(value, list):
             assert all([isinstance(i, dict) for i in value]), (
                 "Links must be list of type 'dict'"
@@ -201,7 +201,7 @@ class LinksConfig(BaseConfig):
         return self._cylinder
 
     @cylinder.setter
-    def cylinder(self, value: List[dict] | LinkListConfig) -> None:
+    def cylinder(self, value: Union[List[dict], LinkListConfig]) -> None:
         if isinstance(value, list):
             assert all([isinstance(i, dict) for i in value]), (
                 "Links must be list of type 'dict'"
@@ -228,7 +228,7 @@ class LinksConfig(BaseConfig):
         return self._mesh
 
     @mesh.setter
-    def mesh(self, value: List[dict] | LinkListConfig) -> None:
+    def mesh(self, value: Union[List[dict], LinkListConfig]) -> None:
         if isinstance(value, list):
             assert all([isinstance(i, dict) for i in value]), (
                 "Links must be list of type 'dict'"
@@ -255,7 +255,7 @@ class LinksConfig(BaseConfig):
         return self._sphere
 
     @sphere.setter
-    def sphere(self, value: List[dict] | LinkListConfig) -> None:
+    def sphere(self, value: Union[List[dict], LinkListConfig]) -> None:
         if isinstance(value, list):
             assert all([isinstance(i, dict) for i in value]), (
                 "Links must be list of type 'dict'"
@@ -318,7 +318,7 @@ class LinksConfig(BaseConfig):
     def remove_frame(
             self,
             # By Object
-            frame: Frame | str
+            frame: Union[Frame, str]
             ) -> None:
         self._frame.remove(frame)
 
@@ -371,7 +371,7 @@ class LinksConfig(BaseConfig):
         self._box.add(box)
 
     # Box: Remove by Object or Name
-    def remove_box(self, box: Box | str) -> None:
+    def remove_box(self, box: Union[Box, str]) -> None:
         self._box.remove(box)
 
     # Box: Get Single Object by Name
@@ -422,7 +422,7 @@ class LinksConfig(BaseConfig):
         self._cylinder.add(cylinder)
 
     # Cylinder: Remove by Object or Name
-    def remove_cylinder(self, cylinder: Cylinder | str) -> None:
+    def remove_cylinder(self, cylinder: Union[Cylinder, str]) -> None:
         self._cylinder.remove(cylinder)
 
     # Cylinder: Get Single Object by Name
@@ -471,7 +471,7 @@ class LinksConfig(BaseConfig):
         self._sphere.add(sphere)
 
     # Sphere: Remove by Object or Name
-    def remove_sphere(self, sphere: Sphere | str) -> None:
+    def remove_sphere(self, sphere: Union[Sphere, str]) -> None:
         self._sphere.remove(sphere)
 
     # Sphere: Get Single Object by Name
@@ -523,7 +523,7 @@ class LinksConfig(BaseConfig):
     def remove_mesh(
             self,
             # By Object
-            mesh: Mesh | str
+            mesh: Union[Mesh, str]
             ) -> None:
         self._mesh.remove(mesh)
 
